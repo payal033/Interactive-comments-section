@@ -1,0 +1,47 @@
+.new-comment-container {
+  background-color: var(--white);
+  margin: 0 auto;
+  width: 50%;
+  border-radius: 8px;
+}
+
+.new-comment-section {
+  display: flex;
+  padding: 25px;
+  justify-content: space-between;
+  height: 140px;
+  align-items: flex-start;
+}
+
+img {
+  height: 45px;
+}
+
+.send {
+  width: 90px;
+  height: 45px;
+  border-radius: 6px;
+  border: none;
+  color: white;
+  font-size: 14px;
+  background-color: var(--moderate-blue);
+  cursor: pointer;
+}
+
+textarea {
+  width: 75%;
+  height: 100%;
+  resize: none;
+  border-radius: 8px;
+  padding: 10px;
+  border: 1px solid var(--light-grey);
+}
+
+textarea::placeholder {
+  color: var(--grayish-blue);
+  font-size: 14px;
+}
+
+textarea:focus {
+  outline: none;
+}

@@ -1,0 +1,105 @@
+.comment-container {
+  background-color: var(--white);
+  margin: 20px auto;
+  width: 50%;
+  border-radius: 8px;
+}
+
+.comment-section {
+  display: flex;
+  padding: 25px;
+  flex-direction: row;
+}
+
+.info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.user-data {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.user-data img {
+  height: 30px;
+  margin-left: 15px;
+  margin-right: 10px;
+}
+
+.user-data p {
+  margin: 0px 5px;
+}
+
+.username {
+  color: var(--grayish-blue);
+  font-weight: 600;
+  line-height: 1.2rem;
+}
+
+.time {
+  color: var(--grayish-blue);
+  font-size: 16px;
+}
+
+.upvotes {
+  background-color: var(--very-light-grey);
+  height: 95px;
+  width: 85px;
+  border-radius: 8px;
+  display: flex;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center;
+}
+
+.upvotes img {
+  border: none;
+  color: var(--light-greyish-blue);
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.upvotes p {
+  margin: 10px;
+  padding: 0;
+  color: var(--moderate-blue);
+  font-size: 16px;
+  font-weight: bold;
+}
+
+p.text {
+  margin: 20px 20px 0px 20px;
+  color: var(--grayish-blue);
+  font-size: 16px;
+  line-height: 1.3rem;
+}
+
+.comment-button {
+  border: none;
+  background-color: transparent;
+  margin-left: 12px;
+  font-size: 16px;
+  color: var(--moderate-blue);
+  font-weight: 500;
+}
+
+.comment-button img {
+  margin-right: 5px;
+}
+
+.delete {
+  color: var(--soft-red);
+}
+
+.taguser {
+  color: var(--moderate-blue);
+  font-weight: 600;
+}
