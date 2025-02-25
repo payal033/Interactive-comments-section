@@ -33,7 +33,12 @@
           >
             <img src="/images/icon-delete.svg" alt="Delete button" />Delete
           </button>
-          <button id="edit" class="comment-button" type="button">
+          <button
+            id="edit"
+            class="comment-button"
+            type="button"
+            (click)="onEdit()"
+          >
             <img src="/images/icon-edit.svg" alt="Edit button" />Edit
           </button>
           }@else {
@@ -45,17 +50,32 @@
       </div>
 
       <div class="comment-text">
+        @if(isEditing) {
+        <textarea [(ngModel)]="commentData.content"></textarea>
+
+        }@else {
         <p class="text">
           @if(replyTo) {
           <span class="taguser">{{ "@" + replyTo }}</span>
           }
           {{ commentData.content }}
         </p>
+        }
       </div>
+
+      @if(currUser === commentData.user.username) { @if(isEditing) {
+      <button
+        id="reply"
+        class="updatebutton"
+        type="button"
+        (click)="updateComment(commentData, commentData.content)"
+      >
+        UPDATE
+      </button>
+      } }
     </div>
   </div>
 </div>
-<div></div>
 
 <!-- Delete Confirmation Modal -->
 @if(showDeleteModal) {

@@ -6,9 +6,11 @@
 }
 
 .comment-section {
-  display: flex;
+  display: grid;
   padding: 25px;
-  flex-direction: row;
+  grid-auto-flow: column;
+  grid-template-columns: 0.1fr 2fr;
+  gap: 10px;
 }
 
 .info {
@@ -49,6 +51,7 @@
 
 .upvotes {
   background-color: var(--very-light-grey);
+  min-height: 95px;
   max-height: 95px;
   max-width: 85px;
   border-radius: 8px;
@@ -114,4 +117,34 @@ p.text {
   padding: 3px;
   font-size: 12px;
   text-align: center;
+}
+
+.updatebutton {
+  width: 90px;
+  height: 45px;
+  margin-top: 12px;
+  border-radius: 6px;
+  border: none;
+  color: white;
+  font-size: 14px;
+  background-color: var(--moderate-blue);
+  cursor: pointer;
+  margin-left: 85%;
+}
+
+textarea {
+  width: 95%;
+  min-height: 150px;
+  resize: vertical;
+  border-radius: 8px;
+  padding: 10px;
+  border: 1px solid var(--light-grey);
+  margin: 20px 20px 0px 20px;
+  color: var(--grayish-blue);
+  font-size: 16px;
+  line-height: 1.3rem;
+}
+
+textarea:focus {
+  outline: 1px solid var(--moderate-blue);
 }

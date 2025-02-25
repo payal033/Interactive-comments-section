@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { Data } from '@angular/router';
-import { Comments, User } from './comments.model';
+import { Comments, Replies, User } from './comments.model';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
@@ -10,7 +10,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class DataService implements OnInit {
   private url = 'data.json';
   private commentsList = new BehaviorSubject<Comments[]>([]);
-  private currentUser = new BehaviorSubject({});
+  private repliesList = new BehaviorSubject<Replies[]>([]);
 
   constructor(private httpClient: HttpClient) {}
 
@@ -36,12 +36,37 @@ export class DataService implements OnInit {
   }
 
   deleteComment(commentId: string) {
+    const originalListLength = this.commentsList.getValue().length;
+    console.log('Original list length ' + originalListLength);
+
+    // Filter out the comment if it matches the ID
     const updatedList = this.commentsList
       .getValue()
-      .filter((comment) => comment.id != commentId);
+      .filter((comment) => comment.id !== commentId);
 
-    this.commentsList.next(updatedList);
+    if (originalListLength !== updatedList.length) {
+      this.commentsList.next(updatedList);
+    } else {
+      // If no comment was removed, check replies
+      const replyList = this.commentsList.getValue().map((comment) => {
+        return {
+          ...comment,
+          replies: comment.replies.filter((reply) => reply.id !== commentId),
+        };
+      });
+
+      this.commentsList.next(replyList);
+    }
+
+    console.log('Updated list length ' + this.commentsList.getValue().length);
   }
 
-  updateComment() {}
+  updateComment(updatedComment: Comments) {
+    const updatedList = this.commentsList
+      .getValue()
+      .map((comment) =>
+        comment.id === updatedComment.id ? updatedComment : comment
+      );
+    this.commentsList.next(updatedList);
+  }
 }
