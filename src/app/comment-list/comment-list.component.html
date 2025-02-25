@@ -1,9 +1,10 @@
 @for(comment of commentsList; track comment.id) {
-<app-comments [commentData]="comment"></app-comments>
+<app-comments [commentData]="comment" [currUser]="currentUser"></app-comments>
 @if (comment.replies) { @for(reply of comment.replies; track reply.id) {
 <div class="reply-section">
   <app-comments
     [commentData]="reply"
+    [currUser]="currentUser"
     [replyTo]="reply.replyingTo"
   ></app-comments>
 </div>

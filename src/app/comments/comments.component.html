@@ -14,18 +14,28 @@
             [alt]="commentData.user.username"
           />
           <p class="username">{{ commentData.user.username }}</p>
+
+          @if(currUser === commentData.user.username) {
+          <span class="tag">you</span>
+
+          }
+
           <p class="time">{{ commentData.createdAt }}</p>
         </div>
+
         <div class="buttons">
-          <button id="reply" class="comment-button" type="button">
-            <img src="/images/icon-reply.svg" alt="" /> Reply
-          </button>
-          <!-- <button id="delete" class="comment-button delete" type="button">
-            <img src="/images/icon-delete.svg" alt="" />Delete
+          @if(currUser === commentData.user.username) {
+          <button id="delete" class="comment-button delete" type="button">
+            <img src="/images/icon-delete.svg" alt="Delete button" />Delete
           </button>
           <button id="edit" class="comment-button" type="button">
-            <img src="/images/icon-edit.svg" alt="" />Edit
-          </button> -->
+            <img src="/images/icon-edit.svg" alt="Edit button" />Edit
+          </button>
+          }@else {
+          <button id="reply" class="comment-button" type="button">
+            <img src="/images/icon-reply.svg" alt="reply button" /> Reply
+          </button>
+          }
         </div>
       </div>
 

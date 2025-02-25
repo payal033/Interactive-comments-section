@@ -11,11 +11,13 @@ import { Comments } from '../comments.model';
 })
 export class CommentListComponent {
   commentsList: Comments[] = [];
+  currentUser!: string;
 
   constructor(private dataService: DataService) {}
 
   ngOnInit() {
     this.dataService.getJsonData().subscribe((data) => {
+      this.currentUser = data['currentUser'].username;
       this.commentsList = data['comments'];
     });
   }

@@ -11,4 +11,5 @@ import { Comments, Replies } from '../comments.model';
 export class CommentsComponent {
   @Input() commentData!: Comments | Replies;
   @Input() replyTo!: string;
+  @Input() currUser!: string;
 }
