@@ -16,6 +16,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
+  width: 100%;
 }
 
 .user-data {
@@ -48,8 +49,8 @@
 
 .upvotes {
   background-color: var(--very-light-grey);
-  height: 95px;
-  width: 85px;
+  max-height: 95px;
+  max-width: 85px;
   border-radius: 8px;
   display: flex;
   padding-top: 5px;
@@ -89,6 +90,7 @@ p.text {
   font-size: 16px;
   color: var(--moderate-blue);
   font-weight: 500;
+  cursor: pointer;
 }
 
 .comment-button img {

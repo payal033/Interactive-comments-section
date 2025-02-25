@@ -1,12 +1,17 @@
 <div class="new-comment-container">
-  <div class="new-comment-section">
+  <form
+    class="new-comment-section"
+    #commentForm="ngForm"
+    (ngSubmit)="addComment(commentForm)"
+  >
     <img [src]="currentUserPic" [alt]="currentUserName" />
     <textarea
       type="text"
       name="comment"
       id="comment"
       placeholder="Add a comment..."
+      ngModel
     ></textarea>
     <button id="send" class="send" type="submit">SEND</button>
-  </div>
+  </form>
 </div>

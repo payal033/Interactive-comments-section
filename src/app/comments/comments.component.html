@@ -1,9 +1,9 @@
 <div class="comment-container">
   <div class="comment-section">
     <div class="upvotes">
-      <img src="../../../images/icon-plus.svg" alt="" />
+      <img src="../../../images/icon-plus.svg" (click)="increaseVote()" />
       <p class="vote-count">{{ commentData.score }}</p>
-      <img src="../../../images/icon-minus.svg" alt="" />
+      <img src="../../../images/icon-minus.svg" (click)="decreaseVote()" />
     </div>
 
     <div class="comment">
@@ -25,7 +25,12 @@
 
         <div class="buttons">
           @if(currUser === commentData.user.username) {
-          <button id="delete" class="comment-button delete" type="button">
+          <button
+            id="delete"
+            class="comment-button delete"
+            type="button"
+            (click)="openDeleteDialog(commentData.id)"
+          >
             <img src="/images/icon-delete.svg" alt="Delete button" />Delete
           </button>
           <button id="edit" class="comment-button" type="button">
@@ -51,3 +56,8 @@
   </div>
 </div>
 <div></div>
+
+<!-- Delete Confirmation Modal -->
+@if(showDeleteModal) {
+<app-delete-modal (confirmDelete)="onConfirmDelete($event)"></app-delete-modal>
+}

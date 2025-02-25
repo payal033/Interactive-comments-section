@@ -16,9 +16,14 @@ export class CommentListComponent {
   constructor(private dataService: DataService) {}
 
   ngOnInit() {
-    this.dataService.getJsonData().subscribe((data) => {
-      this.currentUser = data['currentUser'].username;
-      this.commentsList = data['comments'];
+    this.dataService.getCommentsList().subscribe((comments) => {
+      this.commentsList = comments;
+    });
+
+    this.dataService.fetchComments();
+
+    this.dataService.getJsonData().subscribe((response) => {
+      this.currentUser = response['currentUser'].username;
     });
   }
 }
