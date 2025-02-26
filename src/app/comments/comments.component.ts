@@ -8,12 +8,7 @@ import { NewCommentComponent } from './new-comment/new-comment.component';
 
 @Component({
   selector: 'app-comments',
-  imports: [
-    DeleteModalComponent,
-    FormsModule,
-    CommonModule,
-    NewCommentComponent,
-  ],
+  imports: [FormsModule, CommonModule, NewCommentComponent],
   templateUrl: './comments.component.html',
   styleUrl: './comments.component.css',
 })
@@ -26,21 +21,14 @@ export class CommentsComponent {
 
   isEditing = false;
 
-  showDeleteModal = false;
   showReplyModal = false;
+
+  @Output() deleteClicked = new EventEmitter<number>(); // Emit the ID
 
   constructor(private dataService: DataService) {}
 
-  openDeleteDialog(commentId: number) {
-    this.commentId = commentId;
-    this.showDeleteModal = true;
-  }
-
-  onConfirmDelete(confirmed: boolean) {
-    if (confirmed) {
-      this.dataService.deleteComment(this.commentId);
-    }
-    this.showDeleteModal = false;
+  triggerDeleteModal() {
+    this.deleteClicked.emit(this.commentData.id); // Send ID to parent
   }
 
   onEdit() {

@@ -1,5 +1,9 @@
 @for(comment of commentsList; track comment.id) {
-<app-comments [commentData]="comment" [currUser]="currentUser"></app-comments>
+<app-comments
+  [commentData]="comment"
+  [currUser]="currentUser"
+  (deleteClicked)="openDeleteModal($event)"
+></app-comments>
 
 @if (comment.replies) { @for(reply of comment.replies; track reply.id) {
 <div class="reply-section">
@@ -7,6 +11,12 @@
     [commentData]="reply"
     [currUser]="currentUser"
     [replyTo]="reply.replyingTo"
+    (deleteClicked)="openDeleteModal($event)"
   ></app-comments>
 </div>
 } } }
+
+<!-- Delete Confirmation Modal -->
+@if(showDeleteModal) {
+<app-delete-modal (confirmDelete)="onConfirmDelete($event)"></app-delete-modal>
+}

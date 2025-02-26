@@ -107,6 +107,7 @@ p.text {
   color: var(--moderate-blue);
   font-weight: 500;
   cursor: pointer;
+  z-index: 10;
 }
 
 .comment-button img {
@@ -119,10 +120,12 @@ p.text {
 
 .delete-disabled {
   color: rgba(237, 100, 104, 0.5);
+  cursor: auto;
 }
 
 .edit-disabled {
   color: rgba(84, 87, 182, 0.5);
+  cursor: auto;
 }
 
 .disabled-icon {

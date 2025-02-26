@@ -33,7 +33,7 @@
             id="delete"
             class="comment-button delete"
             type="button"
-            (click)="openDeleteDialog(commentData.id)"
+            (click)="triggerDeleteModal()"
             [disabled]="isEditing"
             [ngClass]="isEditing ? 'delete-disabled' : ''"
           >
@@ -105,9 +105,4 @@
   [addingReply]="true"
   (confirmReply)="onReplyAdded($event)"
 ></app-new-comment>
-}
-
-<!-- Delete Confirmation Modal -->
-@if(showDeleteModal) {
-<app-delete-modal (confirmDelete)="onConfirmDelete($event)"></app-delete-modal>
 }

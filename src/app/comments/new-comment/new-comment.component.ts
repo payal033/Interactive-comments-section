@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { DataService } from '../../data.service';
 import { FormsModule, NgForm } from '@angular/forms';
-import { Comments, User } from '../../comments.model';
+import { User } from '../../comments.model';
 
 @Component({
   selector: 'app-new-comment',
@@ -15,7 +15,6 @@ export class NewCommentComponent {
   currentUser!: User;
   currentUserName!: string;
   currentUserPic!: string;
-  commentsList: Comments[] = [];
   comment!: string;
 
   @Input() commentID!: number;
@@ -33,12 +32,12 @@ export class NewCommentComponent {
   }
 
   addComment(form: NgForm) {
-    if (form.value.comment == '') {
+    if (!form.value.comment) {
       alert('Please enter valid comment!');
       return;
     }
 
-    let commentData = {
+    const commentData = {
       id: Math.floor(Math.random() * (1000 - 1 + 1) + 1),
       content: form.value.comment,
       createdAt: 'Today',
@@ -53,7 +52,7 @@ export class NewCommentComponent {
   }
 
   addReply(form: NgForm) {
-    if (form.value.comment == '') {
+    if (!form.value.comment) {
       alert('Please enter valid data!');
       return;
     }
@@ -66,8 +65,6 @@ export class NewCommentComponent {
       user: this.currentUser,
       replyingTo: this.replyingToUser,
     };
-
-    console.log(replyData);
 
     this.dataService.addReply(this.commentID, replyData);
 
