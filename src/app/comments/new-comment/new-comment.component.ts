@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { DataService } from '../../data.service';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Comments, User } from '../../comments.model';
@@ -18,6 +18,12 @@ export class NewCommentComponent {
   commentsList: Comments[] = [];
   comment!: string;
 
+  @Input() commentID!: string;
+  @Input() replyingToUser!: string;
+  @Input() addingReply: boolean = false;
+
+  @Output() confirmReply = new EventEmitter<boolean>();
+
   ngOnInit() {
     this.dataService.getJsonData().subscribe((response) => {
       this.currentUser = response['currentUser'];
@@ -27,11 +33,16 @@ export class NewCommentComponent {
   }
 
   addComment(form: NgForm) {
+    if (form.value.comment == '') {
+      alert('Please enter valid comment!');
+      return;
+    }
+
     let commentData = {
-      id: Math.random().toString(),
+      id: Math.floor(Math.random() * (1000 - 1 + 1) + 1),
       content: form.value.comment,
       createdAt: 'Today',
-      score: '0',
+      score: 0,
       user: this.currentUser,
       replies: [],
     };
@@ -39,5 +50,29 @@ export class NewCommentComponent {
     this.dataService.addComment(commentData);
 
     form.resetForm();
+  }
+
+  addReply(form: NgForm) {
+    if (form.value.comment == '') {
+      alert('Please enter valid data!');
+      return;
+    }
+
+    const replyData = {
+      id: Math.random().toString(),
+      content: form.value.comment,
+      createdAt: 'Today',
+      score: 0,
+      user: this.currentUser,
+      replyingTo: this.replyingToUser,
+    };
+
+    console.log(replyData);
+
+    this.dataService.addReply(this.commentID, replyData);
+
+    form.resetForm();
+
+    this.confirmReply.emit(true);
   }
 }

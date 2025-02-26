@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { Data } from '@angular/router';
-import { Comments, Replies, User } from './comments.model';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Comments, Replies } from './comments.model';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +10,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class DataService implements OnInit {
   private url = 'data.json';
   private commentsList = new BehaviorSubject<Comments[]>([]);
-  private repliesList = new BehaviorSubject<Replies[]>([]);
 
   constructor(private httpClient: HttpClient) {}
 
@@ -35,14 +34,38 @@ export class DataService implements OnInit {
     this.commentsList.next(updatedList);
   }
 
+  addReply(commentId: string, newReply: Replies) {
+    const comments = this.commentsList.getValue();
+    let isReplyAdded = false;
+
+    const updatedComments = [...comments];
+
+    updatedComments.forEach((comment) => {
+      if (comment.id === +commentId) {
+        comment.replies = [...comment.replies, newReply];
+        isReplyAdded = true;
+      } else {
+        comment.replies.forEach((reply) => {
+          if (reply.id === commentId) {
+            comment.replies = [...comment.replies, newReply];
+            isReplyAdded = true;
+          }
+        });
+      }
+    });
+
+    if (isReplyAdded) {
+      this.commentsList.next(updatedComments);
+    }
+  }
+
   deleteComment(commentId: string) {
     const originalListLength = this.commentsList.getValue().length;
-    console.log('Original list length ' + originalListLength);
 
     // Filter out the comment if it matches the ID
     const updatedList = this.commentsList
       .getValue()
-      .filter((comment) => comment.id !== commentId);
+      .filter((comment) => comment.id !== +commentId);
 
     if (originalListLength !== updatedList.length) {
       this.commentsList.next(updatedList);
@@ -58,7 +81,7 @@ export class DataService implements OnInit {
       this.commentsList.next(replyList);
     }
 
-    console.log('Updated list length ' + this.commentsList.getValue().length);
+    // console.log('Updated list length ' + this.commentsList.getValue().length);
   }
 
   updateComment(updatedComment: Comments) {

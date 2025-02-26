@@ -68,15 +68,23 @@
   color: var(--light-greyish-blue);
   font-size: 20px;
   font-weight: bold;
-  cursor: pointer;
+  text-align: center;
 }
 
 .upvotes p {
-  margin: 10px;
+  margin: 8px;
   padding: 0;
   color: var(--moderate-blue);
   font-size: 16px;
   font-weight: bold;
+}
+
+.upvotes button {
+  border: none;
+  background-color: transparent;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
 }
 
 p.text {
@@ -102,6 +110,18 @@ p.text {
 
 .delete {
   color: var(--soft-red);
+}
+
+.delete-disabled {
+  color: rgba(237, 100, 104, 0.5);
+}
+
+.edit-disabled {
+  color: rgba(84, 87, 182, 0.5);
+}
+
+.disabled-icon {
+  opacity: 0.4;
 }
 
 .taguser {

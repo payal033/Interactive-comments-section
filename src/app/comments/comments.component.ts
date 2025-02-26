@@ -3,10 +3,17 @@ import { DataService } from '../data.service';
 import { Comments, Replies } from '../comments.model';
 import { DeleteModalComponent } from '../delete-modal/delete-modal.component';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { NewCommentComponent } from './new-comment/new-comment.component';
 
 @Component({
   selector: 'app-comments',
-  imports: [DeleteModalComponent, FormsModule],
+  imports: [
+    DeleteModalComponent,
+    FormsModule,
+    CommonModule,
+    NewCommentComponent,
+  ],
   templateUrl: './comments.component.html',
   styleUrl: './comments.component.css',
 })
@@ -20,6 +27,7 @@ export class CommentsComponent {
   isEditing = false;
 
   showDeleteModal = false;
+  showReplyModal = false;
 
   constructor(private dataService: DataService) {}
 
@@ -31,7 +39,6 @@ export class CommentsComponent {
   onConfirmDelete(confirmed: boolean) {
     if (confirmed) {
       this.dataService.deleteComment(this.commentId);
-      console.log('deleted comment');
     }
     this.showDeleteModal = false;
   }
@@ -40,9 +47,24 @@ export class CommentsComponent {
     this.isEditing = true;
   }
 
-  increaseVote() {}
+  increaseVote() {
+    this.commentData.score += 1;
+  }
 
-  decreaseVote() {}
+  decreaseVote() {
+    this.commentData.score -= 1;
+  }
+
+  showReplyBox(commendId: string) {
+    this.commentId = commendId;
+    this.showReplyModal = true;
+  }
+
+  onReplyAdded(confirmed: boolean) {
+    if (confirmed) {
+      this.showReplyModal = false;
+    }
+  }
 
   updateComment(comment: Comments | Replies, commentText: string) {
     const updatedComment: any = { ...comment, content: commentText };

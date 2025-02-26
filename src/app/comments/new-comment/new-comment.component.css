@@ -1,6 +1,6 @@
 .new-comment-container {
   background-color: var(--white);
-  margin: 0 auto;
+  margin: 20px auto;
   width: 50%;
   border-radius: 8px;
 }
@@ -45,3 +45,7 @@ textarea::placeholder {
 textarea:focus {
   outline: none;
 }
+
+/* .disabled-button {
+  background-color: rgba(84, 87, 182, 0.5);
+} */

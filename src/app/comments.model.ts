@@ -1,8 +1,8 @@
 export interface Comments {
-  id: string;
+  id: number;
   content: string;
   createdAt: string;
-  score: string;
+  score: number;
   user: User;
   replies: Replies[];
 }
@@ -12,7 +12,7 @@ export interface Replies {
   content: string;
   createdAt: string;
   replyingTo: string;
-  score: string;
+  score: number;
   user: User;
 }
 
@@ -28,5 +28,5 @@ export interface UserImage {
 
 export interface Data {
   currentUser: User;
-  comments: Comments[]; // Ensure comments is an ARRAY
+  comments: Comments[];
 }

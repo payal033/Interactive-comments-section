@@ -1,9 +1,14 @@
 <div class="comment-container">
   <div class="comment-section">
     <div class="upvotes">
-      <img src="../../../images/icon-plus.svg" (click)="increaseVote()" />
+      <button (click)="increaseVote()">
+        <img src="../../../images/icon-plus.svg" />
+      </button>
+
       <p class="vote-count">{{ commentData.score }}</p>
-      <img src="../../../images/icon-minus.svg" (click)="decreaseVote()" />
+      <button (click)="decreaseVote()">
+        <img src="../../../images/icon-minus.svg" />
+      </button>
     </div>
 
     <div class="comment">
@@ -17,7 +22,6 @@
 
           @if(currUser === commentData.user.username) {
           <span class="tag">you</span>
-
           }
 
           <p class="time">{{ commentData.createdAt }}</p>
@@ -30,19 +34,36 @@
             class="comment-button delete"
             type="button"
             (click)="openDeleteDialog(commentData.id)"
+            [disabled]="isEditing"
+            [ngClass]="isEditing ? 'delete-disabled' : ''"
           >
-            <img src="/images/icon-delete.svg" alt="Delete button" />Delete
+            <img
+              src="/images/icon-delete.svg"
+              alt="Delete button"
+              [ngClass]="isEditing ? 'disabled-icon' : ''"
+            />Delete
           </button>
           <button
             id="edit"
             class="comment-button"
             type="button"
             (click)="onEdit()"
+            [disabled]="isEditing"
+            [ngClass]="isEditing ? 'edit-disabled' : ''"
           >
-            <img src="/images/icon-edit.svg" alt="Edit button" />Edit
+            <img
+              src="/images/icon-edit.svg"
+              alt="Edit button"
+              [ngClass]="isEditing ? 'disabled-icon' : ''"
+            />Edit
           </button>
           }@else {
-          <button id="reply" class="comment-button" type="button">
+          <button
+            id="reply"
+            class="comment-button"
+            type="button"
+            (click)="showReplyBox(commentData.id)"
+          >
             <img src="/images/icon-reply.svg" alt="reply button" /> Reply
           </button>
           }
@@ -76,6 +97,15 @@
     </div>
   </div>
 </div>
+
+@if(showReplyModal) {
+<app-new-comment
+  [commentID]="commentData.id"
+  [replyingToUser]="commentData.user.username"
+  [addingReply]="true"
+  (confirmReply)="onReplyAdded($event)"
+></app-new-comment>
+}
 
 <!-- Delete Confirmation Modal -->
 @if(showDeleteModal) {
