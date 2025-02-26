@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { DataService } from '../../data.service';
 import { FormsModule, NgForm } from '@angular/forms';
-import { User } from '../../comments.model';
+import { User } from '../../data.model';
 
 @Component({
   selector: 'app-new-comment',

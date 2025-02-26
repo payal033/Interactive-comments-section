@@ -1,5 +1,6 @@
 <div class="comment-container">
   <div class="comment-section">
+    <!-- display upvotes -->
     <div class="upvotes">
       <button (click)="increaseVote()" class="highlight">
         <img src="../../../images/icon-plus.svg" />
@@ -11,6 +12,7 @@
       </button>
     </div>
 
+    <!-- display user name, pic and comment posted time -->
     <div class="comment">
       <div class="info">
         <div class="user-data">
@@ -27,6 +29,7 @@
           <p class="time">{{ commentData.createdAt }}</p>
         </div>
 
+        <!-- edit, reply and delete buttons -->
         <div class="buttons">
           @if(currUser === commentData.user.username) {
           <button
@@ -71,10 +74,11 @@
       </div>
 
       <div class="comment-text">
+        <!-- show editing comment/reply ui -->
         @if(isEditing) {
         <textarea [(ngModel)]="commentData.content"></textarea>
-
         }@else {
+        <!-- display comment text -->
         <p class="text">
           @if(replyTo) {
           <span class="taguser">{{ "@" + replyTo }}</span>
@@ -84,6 +88,7 @@
         }
       </div>
 
+      <!-- update button on edit click -->
       @if(currUser === commentData.user.username) { @if(isEditing) {
       <button
         id="reply"
@@ -98,6 +103,7 @@
   </div>
 </div>
 
+<!-- display reply modal on click -->
 @if(showReplyModal) {
 <app-new-comment
   [commentID]="commentData.id"

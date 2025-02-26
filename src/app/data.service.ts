@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
-import { Data } from '@angular/router';
-import { Comments, Replies } from './comments.model';
+import { Comments, Data, Replies } from './data.model';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -21,7 +20,7 @@ export class DataService implements OnInit {
 
   fetchComments() {
     this.httpClient.get<Data>(this.url).subscribe((data) => {
-      this.commentsList.next(data['comments']); // Update BehaviorSubject
+      this.commentsList.next(data['comments']);
     });
   }
 
@@ -41,10 +40,12 @@ export class DataService implements OnInit {
     const updatedComments = [...comments];
 
     updatedComments.forEach((comment) => {
+      // check out the comment if it matches the ID
       if (comment.id === +commentId) {
         comment.replies = [...comment.replies, newReply];
         isReplyAdded = true;
       } else {
+        // If no comment was found, check replies
         comment.replies.forEach((reply) => {
           if (reply.id === commentId) {
             comment.replies = [...comment.replies, newReply];
@@ -80,8 +81,6 @@ export class DataService implements OnInit {
 
       this.commentsList.next(replyList);
     }
-
-    // console.log('Updated list length ' + this.commentsList.getValue().length);
   }
 
   updateComment(updatedComment: Comments) {

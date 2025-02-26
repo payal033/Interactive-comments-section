@@ -45,7 +45,3 @@ textarea::placeholder {
 textarea:focus {
   outline: none;
 }
-
-/* .disabled-button {
-  background-color: rgba(84, 87, 182, 0.5);
-} */

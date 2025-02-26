@@ -10,10 +10,10 @@ export class DeleteModalComponent {
   @Output() confirmDelete = new EventEmitter<boolean>();
 
   onCancel() {
-    this.confirmDelete.emit(false); // Emit false if canceled
+    this.confirmDelete.emit(false);
   }
 
   onConfirm() {
-    this.confirmDelete.emit(true); // Emit true if confirmed
+    this.confirmDelete.emit(true);
   }
 }

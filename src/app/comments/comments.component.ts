@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { DataService } from '../data.service';
-import { Comments, Replies } from '../comments.model';
-import { DeleteModalComponent } from '../delete-modal/delete-modal.component';
+import { Comments, Replies } from '../data.model';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NewCommentComponent } from './new-comment/new-comment.component';
@@ -13,22 +12,19 @@ import { NewCommentComponent } from './new-comment/new-comment.component';
   styleUrl: './comments.component.css',
 })
 export class CommentsComponent {
+  commentId!: number;
+  isEditing = false;
+  showReplyModal = false;
+
   @Input() commentData!: Comments | Replies;
   @Input() replyTo!: string;
   @Input() currUser!: string;
-
-  commentId!: number;
-
-  isEditing = false;
-
-  showReplyModal = false;
-
-  @Output() deleteClicked = new EventEmitter<number>(); // Emit the ID
+  @Output() deleteClicked = new EventEmitter<number>();
 
   constructor(private dataService: DataService) {}
 
   triggerDeleteModal() {
-    this.deleteClicked.emit(this.commentData.id); // Send ID to parent
+    this.deleteClicked.emit(this.commentData.id);
   }
 
   onEdit() {

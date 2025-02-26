@@ -1,4 +1,5 @@
 @for(comment of commentsList; track comment.id) {
+<!-- show each comment -->
 <app-comments
   [commentData]="comment"
   [currUser]="currentUser"
@@ -7,6 +8,7 @@
 
 @if (comment.replies) { @for(reply of comment.replies; track reply.id) {
 <div class="reply-section">
+  <!-- show replies within comments -->
   <app-comments
     [commentData]="reply"
     [currUser]="currentUser"
