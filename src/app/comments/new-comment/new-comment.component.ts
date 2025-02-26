@@ -18,7 +18,7 @@ export class NewCommentComponent {
   commentsList: Comments[] = [];
   comment!: string;
 
-  @Input() commentID!: string;
+  @Input() commentID!: number;
   @Input() replyingToUser!: string;
   @Input() addingReply: boolean = false;
 
@@ -59,7 +59,7 @@ export class NewCommentComponent {
     }
 
     const replyData = {
-      id: Math.random().toString(),
+      id: Math.floor(Math.random() * (1000 - 1 + 1) + 1),
       content: form.value.comment,
       createdAt: 'Today',
       score: 0,

@@ -8,7 +8,7 @@ export interface Comments {
 }
 
 export interface Replies {
-  id: string;
+  id: number;
   content: string;
   createdAt: string;
   replyingTo: string;

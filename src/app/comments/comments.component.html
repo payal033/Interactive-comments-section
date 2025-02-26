@@ -1,12 +1,12 @@
 <div class="comment-container">
   <div class="comment-section">
     <div class="upvotes">
-      <button (click)="increaseVote()">
+      <button (click)="increaseVote()" class="highlight">
         <img src="../../../images/icon-plus.svg" />
       </button>
 
       <p class="vote-count">{{ commentData.score }}</p>
-      <button (click)="decreaseVote()">
+      <button (click)="decreaseVote()" class="highlight">
         <img src="../../../images/icon-minus.svg" />
       </button>
     </div>

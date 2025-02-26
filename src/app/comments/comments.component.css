@@ -87,6 +87,11 @@
   cursor: pointer;
 }
 
+.highlight:hover img,
+.highlight:active img {
+  filter: brightness(0.6);
+}
+
 p.text {
   margin: 20px 20px 0px 20px;
   color: var(--grayish-blue);

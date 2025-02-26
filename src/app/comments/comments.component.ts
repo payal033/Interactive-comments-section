@@ -22,7 +22,7 @@ export class CommentsComponent {
   @Input() replyTo!: string;
   @Input() currUser!: string;
 
-  commentId!: string;
+  commentId!: number;
 
   isEditing = false;
 
@@ -31,7 +31,7 @@ export class CommentsComponent {
 
   constructor(private dataService: DataService) {}
 
-  openDeleteDialog(commentId: string) {
+  openDeleteDialog(commentId: number) {
     this.commentId = commentId;
     this.showDeleteModal = true;
   }
@@ -55,7 +55,7 @@ export class CommentsComponent {
     this.commentData.score -= 1;
   }
 
-  showReplyBox(commendId: string) {
+  showReplyBox(commendId: number) {
     this.commentId = commendId;
     this.showReplyModal = true;
   }

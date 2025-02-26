@@ -34,7 +34,7 @@ export class DataService implements OnInit {
     this.commentsList.next(updatedList);
   }
 
-  addReply(commentId: string, newReply: Replies) {
+  addReply(commentId: number, newReply: Replies) {
     const comments = this.commentsList.getValue();
     let isReplyAdded = false;
 
@@ -59,7 +59,7 @@ export class DataService implements OnInit {
     }
   }
 
-  deleteComment(commentId: string) {
+  deleteComment(commentId: number) {
     const originalListLength = this.commentsList.getValue().length;
 
     // Filter out the comment if it matches the ID
