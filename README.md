@@ -44,8 +44,11 @@ ng serve  # or npm start
 
 The app will be available at http://localhost:4200.
 
-[Demo]()
+[Demo](https://payal033.github.io/Interactive-comments-section/)
 
 ### Screenshots
 
-![]()
+![desktop-design-1](./screenshots/desktop-design-1.png)
+![desktop](./screenshots/desktop.png)
+![delete-modal-desktop](./screenshots/delete-modal-desktop.png)
+![mobile-design-2](./screenshots/mobile-design-2.png) ![mobile-design-3](./screenshots/delete-mob.png)
