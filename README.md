@@ -1,6 +1,6 @@
 # Frontend Mentor - Interactive comments section
 
-# Interactive Comments Section 💬
+## Interactive Comments Section 💬
 
 This project is an **interactive comments section** built as part of a **Frontend Mentor challenge**. The goal is to create a fully functional comment system with real-time interactions, including replies, voting, and editing capabilities.
 
