@@ -3,12 +3,12 @@
     <!-- display upvotes -->
     <div class="upvotes">
       <button (click)="increaseVote()" class="highlight">
-        <img src="../../../images/icon-plus.svg" />
+        <img src="images/icon-plus.svg" />
       </button>
 
       <p class="vote-count">{{ commentData.score }}</p>
       <button (click)="decreaseVote()" class="highlight">
-        <img src="../../../images/icon-minus.svg" />
+        <img src="images/icon-minus.svg" />
       </button>
     </div>
 
@@ -41,7 +41,7 @@
             [ngClass]="isEditing ? 'delete-disabled' : ''"
           >
             <img
-              src="/images/icon-delete.svg"
+              src="images/icon-delete.svg"
               alt="Delete button"
               [ngClass]="isEditing ? 'disabled-icon' : ''"
             />Delete
@@ -55,7 +55,7 @@
             [ngClass]="isEditing ? 'edit-disabled' : ''"
           >
             <img
-              src="/images/icon-edit.svg"
+              src="images/icon-edit.svg"
               alt="Edit button"
               [ngClass]="isEditing ? 'disabled-icon' : ''"
             />Edit
@@ -67,7 +67,7 @@
             type="button"
             (click)="showReplyBox(commentData.id)"
           >
-            <img src="/images/icon-reply.svg" alt="reply button" /> Reply
+            <img src="images/icon-reply.svg" alt="reply button" /> Reply
           </button>
           }
         </div>
