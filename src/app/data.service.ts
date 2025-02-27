@@ -8,20 +8,27 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class DataService implements OnInit {
   private url = 'data.json';
-  private commentsList = new BehaviorSubject<Comments[]>([]);
+  private commentsList = new BehaviorSubject<Comments[]>(
+    this.loadFromLocalStorage()
+  );
 
   constructor(private httpClient: HttpClient) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.fetchComments();
+  }
 
   getJsonData() {
     return this.httpClient.get<Data>(this.url);
   }
 
   fetchComments() {
-    this.httpClient.get<Data>(this.url).subscribe((data) => {
-      this.commentsList.next(data['comments']);
-    });
+    if (this.loadFromLocalStorage().length === 0) {
+      this.httpClient.get<Data>(this.url).subscribe((data) => {
+        this.commentsList.next(data['comments']);
+        this.saveToLocalStorage(data['comments']);
+      });
+    }
   }
 
   getCommentsList() {
@@ -31,6 +38,7 @@ export class DataService implements OnInit {
   addComment(newComment: Comments) {
     const updatedList = [...this.commentsList.getValue(), newComment];
     this.commentsList.next(updatedList);
+    this.saveToLocalStorage(updatedList);
   }
 
   addReply(commentId: number, newReply: Replies) {
@@ -57,6 +65,7 @@ export class DataService implements OnInit {
 
     if (isReplyAdded) {
       this.commentsList.next(updatedComments);
+      this.saveToLocalStorage(updatedComments);
     }
   }
 
@@ -70,6 +79,7 @@ export class DataService implements OnInit {
 
     if (originalListLength !== updatedList.length) {
       this.commentsList.next(updatedList);
+      this.saveToLocalStorage(updatedList);
     } else {
       // If no comment was removed, check replies
       const replyList = this.commentsList.getValue().map((comment) => {
@@ -80,6 +90,7 @@ export class DataService implements OnInit {
       });
 
       this.commentsList.next(replyList);
+      this.saveToLocalStorage(replyList);
     }
   }
 
@@ -90,5 +101,15 @@ export class DataService implements OnInit {
         comment.id === updatedComment.id ? updatedComment : comment
       );
     this.commentsList.next(updatedList);
+    this.saveToLocalStorage(updatedList);
+  }
+
+  private saveToLocalStorage(comments: Comments[]) {
+    localStorage.setItem('comments', JSON.stringify(comments));
+  }
+
+  private loadFromLocalStorage(): Comments[] {
+    const storedComments = localStorage.getItem('comments');
+    return storedComments ? JSON.parse(storedComments) : [];
   }
 }
