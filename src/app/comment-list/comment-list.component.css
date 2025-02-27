@@ -4,3 +4,10 @@
   width: 80%;
   transform: translateX(19%);
 }
+
+@media screen and (max-width: 768px) {
+  .reply-section {
+    width: 90%;
+    transform: translateX(10%);
+  }
+}

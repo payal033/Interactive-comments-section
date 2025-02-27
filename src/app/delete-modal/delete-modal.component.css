@@ -13,10 +13,15 @@
 
 /* Modal content */
 .modal-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
   background: white;
   padding: 25px;
   border-radius: 8px;
-  width: 350px;
+  max-width: 350px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -62,4 +67,21 @@ button.cancel {
 button.danger {
   background: var(--soft-red);
   color: var(--white);
+}
+
+@media screen and (max-width: 768px) {
+  .modal-backdrop {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .modal-content {
+    position: fixed;
+    top: 50%;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 350px;
+  }
 }

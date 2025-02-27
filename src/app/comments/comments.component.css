@@ -176,3 +176,86 @@ textarea {
 textarea:focus {
   outline: 1px solid var(--moderate-blue);
 }
+
+@media screen and (max-width: 768px) {
+  .comment {
+    width: 100%;
+  }
+
+  .comment-container {
+    width: 95%; /* Increase width for small screens */
+    margin: 15px 10px;
+  }
+
+  .comment-section {
+    grid-auto-flow: row;
+    grid-template-columns: 1fr; /* Full width */
+    gap: 5px;
+    padding: 15px;
+    position: relative;
+  }
+
+  /* Align upvotes and buttons in the same row below the comment */
+  .upvotes,
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .upvotes {
+    order: 1; /* Move upvotes below comment */
+    flex-direction: row;
+    justify-content: flex-start;
+    min-height: 40px;
+    max-height: 40px;
+    position: relative;
+  }
+
+  .buttons {
+    order: 2; /* Move buttons below upvotes */
+    justify-content: flex;
+    gap: 10px;
+    margin-left: auto;
+    position: absolute;
+    transform: translateY(-50%);
+    bottom: 20px;
+    left: 75%;
+  }
+
+  .comment-section .upvotes,
+  .comment-section .buttons {
+    width: 100%; /* Full width so they align */
+    margin-top: 10px;
+  }
+
+  .delete {
+    position: absolute;
+    right: 100%;
+    width: 30%;
+  }
+
+  .upvotes button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .upvotes p {
+    font-size: 14px;
+    margin: 0 8px;
+  }
+
+  .comment-button {
+    font-size: 14px;
+    margin-left: 0;
+  }
+
+  .comment-text textarea {
+    width: 100%;
+    margin-left: 0px;
+  }
+
+  .updatebutton {
+    margin-left: 70%;
+  }
+}
